@@ -1,6 +1,6 @@
 Name:		fermilab-conf_system-logger
 Version:	1.2
-Release:	1%{?dist}
+Release:	1.1%{?dist}
 Summary:	Log your system logs to the Fermi central logger
 
 Group:		Fermilab
@@ -16,8 +16,12 @@ BuildArch:	noarch
 # Can drop with EL9
 Obsoletes:	zz_use_clogger
 
+# You must log things per CS-doc-5590-v1
+# so require a system logger for now
+Requires: 	rsyslog
+
 # Top level package should require software specific packages
-Requires:	%{name}-rsyslog == %{version}-%{release}
+Requires:	(%{name}-rsyslog == %{version}-%{release} if rsyslog)
 
 %description
 This package will change your syslog configuration that will
@@ -85,6 +89,9 @@ systemctl condrestart rsyslog.service
 %config %{_sysconfdir}/rsyslog.d/*
 
 %changelog
+* Wed Apr 13 2022 Pat Riehecky <riehecky@fnal.gov> 1.2-1.1
+- Use rich boolean deps
+
 * Wed Mar 16 2022 Pat Riehecky <riehecky@fnal.gov> 1.2-1
 - Default to encrypted messages via RITM1289242
 
