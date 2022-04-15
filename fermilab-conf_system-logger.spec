@@ -1,6 +1,6 @@
 Name:		fermilab-conf_system-logger
 Version:	1.2
-Release:	1.1%{?dist}
+Release:	2%{?dist}
 Summary:	Log your system logs to the Fermi central logger
 
 Group:		Fermilab
@@ -89,6 +89,9 @@ systemctl condrestart rsyslog.service
 %config %{_sysconfdir}/rsyslog.d/*
 
 %changelog
+* Fri Apr 15 2022 Pat Riehecky <riehecky@fnal.gov> 1.2-2
+- Leave default templates in place
+
 * Wed Apr 13 2022 Pat Riehecky <riehecky@fnal.gov> 1.2-1.1
 - Use rich boolean deps
 
