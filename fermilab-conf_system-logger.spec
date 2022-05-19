@@ -1,6 +1,6 @@
 Name:		fermilab-conf_system-logger
 Version:	1.2
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	Log your system logs to the Fermi central logger
 
 Group:		Fermilab
@@ -89,6 +89,9 @@ systemctl condrestart rsyslog.service
 %config %{_sysconfdir}/rsyslog.d/*
 
 %changelog
+* Thu May 19 2022 Pat Riehecky <riehecky@fnal.gov> 1.2-4
+- Use disk cache rather than dropping under load
+
 * Thu Apr 28 2022 Pat Riehecky <riehecky@fnal.gov> 1.2-3
 - Note requirements on streamDriver.CAFile
 
