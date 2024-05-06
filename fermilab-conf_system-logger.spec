@@ -1,6 +1,6 @@
 Name:		fermilab-conf_system-logger
-Version:	1.2
-Release:	4%{?dist}
+Version:	1.3
+Release:	1%{?dist}
 Summary:	Log your system logs to the Fermi central logger
 
 Group:		Fermilab
@@ -33,7 +33,7 @@ Requirement from: CS-doc-5590-v1
 %package rsyslog
 Summary:	Log your system logs to the Fermi central logger using rsyslog
 Requires:	%{name} = %{version}-%{release}
-Requires:	rsyslog-gnutls
+Requires:	rsyslog-gnutls >= 8.2108.0
 Requires(post):	rsyslog >= 8.0 systemd
 Requires(postun):	rsyslog >= 8.0 systemd
 
@@ -89,6 +89,9 @@ systemctl condrestart rsyslog.service
 %config %{_sysconfdir}/rsyslog.d/*
 
 %changelog
+* Mon May 6 2024 Pat Riehecky <riehecky@fnal.gov> 1.3-1
+- Use newer rsyslog features
+
 * Thu May 19 2022 Pat Riehecky <riehecky@fnal.gov> 1.2-4
 - Use disk cache rather than dropping under load
 
