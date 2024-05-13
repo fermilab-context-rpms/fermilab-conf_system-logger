@@ -91,6 +91,7 @@ systemctl condrestart rsyslog.service
 %changelog
 * Mon May 6 2024 Pat Riehecky <riehecky@fnal.gov> 1.3-1
 - Use newer rsyslog features
+- Don't log certificate warnings to syslog (still in journald)
 
 * Thu May 19 2022 Pat Riehecky <riehecky@fnal.gov> 1.2-4
 - Use disk cache rather than dropping under load
