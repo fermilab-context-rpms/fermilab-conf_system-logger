@@ -1,5 +1,5 @@
 Name:		fermilab-conf_system-logger
-Version:	1.3
+Version:	1.4
 Release:	1%{?dist}
 Summary:	Log your system logs to the Fermi central logger
 
@@ -89,6 +89,9 @@ systemctl condrestart rsyslog.service
 %config %{_sysconfdir}/rsyslog.d/*
 
 %changelog
+* Mon May 20 2024 Pat Riehecky <riehecky@fnal.gov> 1.4-1
+* Skip CA check to make CST cert rotation easier
+
 * Mon May 6 2024 Pat Riehecky <riehecky@fnal.gov> 1.3-1
 - Use newer rsyslog features
 - Don't log certificate warnings to syslog (still in journald)
