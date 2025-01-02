@@ -1,6 +1,6 @@
 Name:		fermilab-conf_system-logger
 Version:	1.4
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Log your system logs to the Fermi central logger
 
 Group:		Fermilab
@@ -8,13 +8,13 @@ License:	MIT
 URL:		https://github.com/fermilab-context-rpms/fermilab-conf_system-logger
 
 Source0:	000-rsyslog-use-clogger.conf
-Source1:	FERMI_Sub_CA_01.pem
 
 BuildRequires:	augeas coreutils /usr/bin/awk
 BuildArch:	noarch
 
-# Can drop with EL9
+%if 0%{?rhel} < 10
 Obsoletes:	zz_use_clogger
+%endif
 
 # You must log things per CS-doc-5590-v1
 # so require a system logger for now
@@ -52,7 +52,6 @@ Requirement from: CS-doc-5590-v1
 
 %install
 %{__install} -D %{SOURCE0} %{buildroot}%{_sysconfdir}/rsyslog.d/000-use-clogger.conf
-%{__install} -D %{SOURCE1} %{buildroot}%{_sysconfdir}/clogger_syslog_ca.pem
 
 
 %check
@@ -79,16 +78,16 @@ systemctl condrestart rsyslog.service
 systemctl condrestart rsyslog.service
 
 %files
-# ca provided by top level package if we want to support
-# other syslogs at some point
 %defattr(0644,root,root,0755)
-/etc/clogger_syslog_ca.pem
 
 %files rsyslog
 %defattr(0644,root,root,0755)
 %config %{_sysconfdir}/rsyslog.d/*
 
 %changelog
+* Thu Jan 2 2025 Pat Riehecky <riehecky@fnal.gov> 1.4-2
+* Since we don't use the CA cert, don't ship it
+
 * Mon May 20 2024 Pat Riehecky <riehecky@fnal.gov> 1.4-1
 * Skip CA check to make CST cert rotation easier
 
